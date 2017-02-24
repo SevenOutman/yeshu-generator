@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>椰树生成器</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <style>
         html, body {
             width: 100%;
-            max-width: 640px;
+            max-width: 800px;
             margin: 0 auto;
             background-color: whitesmoke;
-            font-family: Arial, serif;
+            font-family: Arial, sans-serif;
         }
 
         [v-cloak] {
@@ -34,6 +35,12 @@
             font-weight: bold;
             text-align: center;
             line-height: 1;
+        }
+
+        #save {
+            margin: 0 auto;
+            display: block;
+            vertical-align: bottom;
         }
 
         .yeshu-center {
@@ -123,16 +130,17 @@
             font-size: 1.5rem;
         }
 
-        #save {
+        .button {
             -webkit-appearance: none;
             border: none;
             outline: none;
-            display: block;
 
-            width: 100%;
             background-color: #206DDC;
             color: #ffffff;
             font-size: 24px;
+            text-align: center;
+            line-height: 1;
+            padding: 13px 0;
         }
     </style>
 </head>
@@ -140,7 +148,7 @@
 <img src="./yeshu.jpg" id="share" style="opacity: 0; width: 0; height: 0; position: absolute;">
 <div id="app">
     <div id="preview">
-        <div id="yeshu" v-cloak :style="yeshuStyleObj">
+        <div id="yeshu" v-cloak :style="yeshuStyleObj" v-if="status != 'save'">
             <div class="yeshu-center">
                 <div class="yeshu-title" contenteditable="true">
                     椰子特产在海南
@@ -171,10 +179,24 @@
                 <p contenteditable="true">不加香精当生榨</p>
             </div>
         </div>
+        <img id="save" v-if="status == 'save'" :src="dataURL" :style="yeshuStyleObj">
     </div>
-    <button id="save" type="button" @click="save" :style="{ height: saveBtnHeight + 'px' }">
-        保存图片
-    </button>
+    <div :style="{ height: saveBtnHeight + 'px', 'font-size': 0 }" v-if="status != 'save'">
+        <button class="button" type="button" @click="save" style="width: 70%">
+            {{ status == 'edit' ? '保存图片' : '正在生成图片…' }}
+        </button>
+        <button class="button" type="button" @click="source" style="width: 30%; background-color: #0021FC">
+            查看源码
+        </button>
+    </div>
+    <div :style="{ height: saveBtnHeight + 'px', 'font-size': 0 }" v-if="status == 'save'">
+        <button class="button" type="button" style="width: 70%">
+            长按/右键图片保存
+        </button>
+        <button class="button" type="button" @click="back" style="width: 30%; background-color: #0021FC">
+            返回修改
+        </button>
+    </div>
 </div>
 <script src="//cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
 <script src="//cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
@@ -186,7 +208,10 @@
                 width: 'auto',
                 height: 0
             },
-            saveBtnHeight: 50
+            saveBtnHeight: 50,
+
+            status: 'edit',
+            dataURL: ''
         },
         mounted: function () {
             var h = window.innerHeight || document.documentElement.clientHeight;
@@ -197,14 +222,20 @@
             document.documentElement.style.fontSize = (previewHeight / 21) + 'px';
         },
         methods: {
+            back: function () {
+                this.status = 'edit';
+            },
+            source: function () {
+                location.href = 'https://github.com/SevenOutman/yeshu-generator/'
+            },
             save: function () {
+                var self = this;
+                this.status = 'wait';
+
                 html2canvas(document.getElementById('yeshu'), {
                     onrendered: function (canvas) {
-                        var gh = canvas.toDataURL('image/png');
-                        var a = document.createElement('a');
-                        a.href = gh;
-                        a.download = 'yeshu.png';
-                        a.click();
+                        self.dataURL = canvas.toDataURL('image/png');
+                        self.status = 'save';
                     }
                 })
             }
