@@ -9,6 +9,7 @@
             max-width: 640px;
             margin: 0 auto;
             background-color: whitesmoke;
+            font-family: Arial, serif;
         }
 
         [v-cloak] {
@@ -59,6 +60,7 @@
             vertical-align: baseline;
             margin: 5px 0;
         }
+
         .yeshu-brand {
             border: 2px solid #FEEF50;
             border-radius: 0.5rem;
@@ -67,19 +69,21 @@
 
             font-size: 3.6rem;
         }
+
         .yeshu-year {
             margin: 5px 0;
-            text-shadow:
-                -2px -2px 0 #000,
-                2px -2px 0 #000,
-                -2px 2px 0 #000,
-                2px 2px 0 #000;
+            text-shadow: -2px -2px 0 #000,
+            2px -2px 0 #000,
+            -2px 2px 0 #000,
+            2px 2px 0 #000;
             font-size: 3.3rem;
         }
+
         .yeshu-island {
             color: #FEEF50;
             font-size: 1.2rem;
         }
+
         .yeshu-fresh {
             border: 4px solid #FD0000;
             border-radius: 5px;
@@ -90,14 +94,14 @@
 
             font-size: 1.2rem;
         }
+
         .yeshu-xianzha {
             color: #FEEF50;
             font-size: 4rem;
-            text-shadow:
-                    -2px -2px 0 #000,
-                    2px -2px 0 #000,
-                    -2px 2px 0 #000,
-                    2px 2px 0 #000;
+            text-shadow: -2px -2px 0 #000,
+            2px -2px 0 #000,
+            -2px 2px 0 #000,
+            2px 2px 0 #000;
         }
 
         .yeshu-no-addon {
@@ -108,11 +112,13 @@
             margin: -5px 5px;
             color: #ffffff;
         }
+
         .yeshu-no-addon > p {
             line-height: 1;
             margin: 0;
             font-size: 1.2rem;
         }
+
         .yeshu-no-addon > p:first-child {
             font-size: 1.5rem;
         }
@@ -131,7 +137,7 @@
     </style>
 </head>
 <body>
-<img src="./yeshu.jpg" id="share" style="opacity: 0; position: absolute;">
+<img src="./yeshu.jpg" id="share" style="opacity: 0; width: 0; height: 0; position: absolute;">
 <div id="app">
     <div id="preview">
         <div id="yeshu" v-cloak :style="yeshuStyleObj">
