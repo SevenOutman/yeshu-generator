@@ -30,7 +30,7 @@
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
-            padding: 10px 0;
+            padding: .2rem 0;
 
             font-weight: bold;
             text-align: center;
@@ -44,9 +44,9 @@
         }
 
         .yeshu-center {
-            margin: 0 20px;
+            margin: 0 .4rem;
             background-color: #FEEF50;
-            padding: 5px;
+            padding: .1rem;
         }
 
         .yeshu-title {
@@ -57,32 +57,32 @@
 
         .yeshu-inner {
             background-color: #0021FC;
-            border: 2px solid #000000;
+            border: .04rem solid #000000;
             color: #ffffff;
-            padding: 2px 2px 20px;
+            padding: .04rem .04rem .4rem;
         }
 
         .yeshu-zhengzong {
             font-size: 1.1rem;
             vertical-align: baseline;
-            margin: 5px 0;
+            margin: .1rem 0;
         }
 
         .yeshu-brand {
-            border: 2px solid #FEEF50;
+            border: .04rem solid #FEEF50;
             border-radius: 0.5rem;
             background-color: #FD0000;
-            padding: 5px;
+            padding: .1rem;
 
             font-size: 3.6rem;
         }
 
         .yeshu-year {
-            margin: 5px 0;
-            text-shadow: -2px -2px 0 #000,
-            2px -2px 0 #000,
-            -2px 2px 0 #000,
-            2px 2px 0 #000;
+            margin: .1rem 0;
+            text-shadow: -.04rem -.04rem 0 #000,
+            .04rem -.04rem 0 #000,
+            -.04rem .04rem 0 #000,
+            .04rem .04rem 0 #000;
             font-size: 3.3rem;
         }
 
@@ -92,12 +92,12 @@
         }
 
         .yeshu-fresh {
-            border: 4px solid #FD0000;
-            border-radius: 5px;
+            border: .08rem solid #FD0000;
+            border-radius: .1rem;
             background-color: #FEEF50;
             color: #FD0000;
-            margin: 5px -5px;
-            padding: 5px;
+            margin: .1rem -.1rem;
+            padding: .1rem;
 
             font-size: 1.2rem;
         }
@@ -105,18 +105,18 @@
         .yeshu-xianzha {
             color: #FEEF50;
             font-size: 4rem;
-            text-shadow: -2px -2px 0 #000,
-            2px -2px 0 #000,
-            -2px 2px 0 #000,
-            2px 2px 0 #000;
+            text-shadow: -.04rem -.04rem 0 #000,
+            .04rem -.04rem 0 #000,
+            -.04rem .04rem 0 #000,
+            .04rem .04rem 0 #000;
         }
 
         .yeshu-no-addon {
-            border: 3px solid #FEEF50;
+            border: .06rem solid #FEEF50;
             border-radius: 0.3rem;
             background-color: #FD0000;
-            padding: 5px;
-            margin: -5px 5px;
+            padding: .1rem;
+            margin: -.1rem .1rem;
             color: #ffffff;
         }
 
@@ -137,18 +137,18 @@
 
             background-color: #206DDC;
             color: #ffffff;
-            font-size: 24px;
+            font-size: 20px;
             text-align: center;
             line-height: 1;
-            padding: 13px 0;
+            padding: 15px 0;
         }
     </style>
 </head>
 <body>
 <img src="./yeshu.jpg" id="share" style="opacity: 0; width: 0; height: 0; position: absolute;">
-<div id="app">
+<div id="app" v-cloak>
     <div id="preview">
-        <div id="yeshu" v-cloak :style="yeshuStyleObj" v-if="status != 'save'">
+        <div id="yeshu" :style="yeshuStyleObj" v-if="status != 'save'">
             <div class="yeshu-center">
                 <div class="yeshu-title" contenteditable="true">
                     椰子特产在海南
