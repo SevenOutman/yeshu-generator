@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>椰树生成器</title>
+    <style>
+        html, body {
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            background-color: whitesmoke;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+
+        #preview {
+            background-color: #ffffff;
+        }
+
+        #yeshu {
+            width: auto;
+            height: 0;
+
+            margin: 0 auto;
+            background-color: #000;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 10px 0;
+
+            font-weight: bold;
+            text-align: center;
+            line-height: 1;
+        }
+
+        .yeshu-center {
+            margin: 0 20px;
+            background-color: #FEEF50;
+            padding: 5px;
+        }
+
+        .yeshu-title {
+            color: #000;
+            height: 5%;
+            font-size: 1.1rem;
+        }
+
+        .yeshu-inner {
+            background-color: #0021FC;
+            border: 2px solid #000000;
+            color: #ffffff;
+            padding: 2px 2px 20px;
+        }
+
+        .yeshu-zhengzong {
+            font-size: 1.1rem;
+            vertical-align: baseline;
+            margin: 5px 0;
+        }
+        .yeshu-brand {
+            border: 2px solid #FEEF50;
+            border-radius: 0.5rem;
+            background-color: #FD0000;
+            padding: 5px;
+
+            font-size: 3.6rem;
+        }
+        .yeshu-year {
+            margin: 5px 0;
+            text-shadow:
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000,
+                2px 2px 0 #000;
+            font-size: 3.3rem;
+        }
+        .yeshu-island {
+            color: #FEEF50;
+            font-size: 1.2rem;
+        }
+        .yeshu-fresh {
+            border: 4px solid #FD0000;
+            border-radius: 5px;
+            background-color: #FEEF50;
+            color: #FD0000;
+            margin: 5px -5px;
+            padding: 5px;
+
+            font-size: 1.2rem;
+        }
+        .yeshu-xianzha {
+            color: #FEEF50;
+            font-size: 4rem;
+            text-shadow:
+                    -2px -2px 0 #000,
+                    2px -2px 0 #000,
+                    -2px 2px 0 #000,
+                    2px 2px 0 #000;
+        }
+
+        .yeshu-no-addon {
+            border: 3px solid #FEEF50;
+            border-radius: 0.3rem;
+            background-color: #FD0000;
+            padding: 5px;
+            margin: -5px 5px;
+            color: #ffffff;
+        }
+        .yeshu-no-addon > p {
+            line-height: 1;
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        .yeshu-no-addon > p:first-child {
+            font-size: 1.5rem;
+        }
+
+        #save {
+            -webkit-appearance: none;
+            border: none;
+            outline: none;
+            display: block;
+
+            width: 100%;
+            background-color: #206DDC;
+            color: #ffffff;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<img src="./yeshu.jpg" id="share" style="opacity: 0; position: absolute;">
+<div id="app">
+    <div id="preview">
+        <div id="yeshu" v-cloak :style="yeshuStyleObj">
+            <div class="yeshu-center">
+                <div class="yeshu-title" contenteditable="true">
+                    椰子特产在海南
+                </div>
+                <div class="yeshu-inner">
+                    <div class="yeshu-zhengzong" contenteditable="true">
+                        正宗
+                    </div>
+                    <div class="yeshu-brand" contenteditable="true">
+                        椰树
+                    </div>
+                    <div class="yeshu-year" contenteditable="true">
+                        29年
+                    </div>
+                    <div class="yeshu-island" contenteditable="true">
+                        坚持在海南岛
+                    </div>
+                    <div class="yeshu-fresh" contenteditable="true">
+                        用新鲜椰子肉
+                    </div>
+                    <div class="yeshu-xianzha" contenteditable="true">
+                        鲜榨
+                    </div>
+                </div>
+            </div>
+            <div class="yeshu-no-addon">
+                <p contenteditable="true">不用椰浆</p>
+                <p contenteditable="true">不加香精当生榨</p>
+            </div>
+        </div>
+    </div>
+    <button id="save" type="button" @click="save" :style="{ height: saveBtnHeight + 'px' }">
+        保存图片
+    </button>
+</div>
+<script src="//cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+<script src="//cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            yeshuStyleObj: {
+                width: 'auto',
+                height: 0
+            },
+            saveBtnHeight: 50
+        },
+        mounted: function () {
+            var h = window.innerHeight || document.documentElement.clientHeight;
+            var previewHeight = h - this.saveBtnHeight;
+            this.yeshuStyleObj.height = previewHeight + 'px';
+            this.yeshuStyleObj.width = (previewHeight / 2.1) + 'px';
+
+            document.documentElement.style.fontSize = (previewHeight / 21) + 'px';
+        },
+        methods: {
+            save: function () {
+                html2canvas(document.getElementById('yeshu'), {
+                    onrendered: function (canvas) {
+                        var gh = canvas.toDataURL('image/png');
+                        var a = document.createElement('a');
+                        a.href = gh;
+                        a.download = 'yeshu.png';
+                        a.click();
+                    }
+                })
+            }
+        }
+    })
+</script>
+</body>
+</html>
