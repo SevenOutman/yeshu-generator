@@ -27,6 +27,7 @@
 
             margin: 0 auto;
             background-color: #000;
+            border: 2px solid #FEEF50;
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
@@ -183,7 +184,7 @@
     </div>
     <div :style="{ height: saveBtnHeight + 'px', 'font-size': 0 }" v-if="status != 'save'">
         <button class="button" type="button" @click="save" style="width: 70%">
-            {{ status == 'edit' ? '保存图片' : '正在生成图片…' }}
+            {{ status == 'edit' ? '保存编辑' : '正在生成图片…' }}
         </button>
         <button class="button" type="button" @click="source" style="width: 30%; background-color: #0021FC">
             查看源码
@@ -232,7 +233,9 @@
                 var self = this;
                 this.status = 'wait';
 
-                html2canvas(document.getElementById('yeshu'), {
+                var yeshu = document.getElementById('yeshu');
+
+                html2canvas(yeshu, {
                     onrendered: function (canvas) {
                         self.dataURL = canvas.toDataURL('image/png');
                         self.status = 'save';
